@@ -55,6 +55,8 @@ Here is a sample ```POM``` file -
 </project>
 ```
 
+:boom: In the above code snippet, the ```parent tag``` contains the ```parent POM``` for the current ```child POM```.
+
 #### Super POM and and POM Inheritance 
 
 All Maven ```POM``` files inherit from a super ```POM```. If no super ```POM``` is specified, the ```POM``` file inherits from the base ```POM```. 
@@ -94,9 +96,51 @@ Snapshot dependencies are dependencies (JAR files) which are under development.
 
 Follow these steps to create a simple Maven Project - 
 
-1. Click on ```File```
-1. Select new ```Maven Project```
-1. For now select ```skip ArchType Selection```
-1. Provide the necessary details for the project 
-1. Click on ```Finish```
+1.	Click on ```File```
+1.	Select new ```Maven Project```
+1.	For now select ```skip ArchType Selection```
+	1.	```ArchType``` provides different templates for a Maven Project.	
+1.	Provide the necessary details for the project 
+1.	Click on ```Finish```
+
+:warning: We can create resolve most issues by using ```Ctrl + 1``` in Windows. It is equivalent to ```Alt + Enter``` in ```Android Studio```.
+
+:warning: Unused imports can be removed in STS by pressing ```Ctrl + Shift + O```.
+
+## Creating a Simple SpringBootApplication 
+
+A ```main()``` method is required to start a Spring Boot application. The class which contains the ```main()``` method needs to be annotated with ```@SpringBootApplication```. 
+
+The ```@SpringBootApplication``` annotation does the following three things - 
+
+1.	Do ```auto-configuration``` 
+1.	Do ```component scan```
+1.	Do extra configuration stuff on their application class. 
+
+A single ```@SpringBootApplication``` is equivalent to the following - 
+
+1.	```@EnableAutoConfiguration```: enable Spring Boot’s auto-configuration mechanism
+1.	```@ComponentScan```: enable @Component scan on the package where the application is located (see the best practices)
+1.	```@Configuration```: allow to register extra beans in the context or import additional configuration classes
+
+:boom: A Spring application can be started using the static ```run()``` method of the ```SpringApplication``` class.
+
+Here is a code snippet - 
+
+```java 
+@SpringBootApplication 
+public class FruitApiApp {
+	public static void main(String[] args) {
+		SpringApplication.run(FruitApiApp.class, args);
+	}
+}
+```
+
+## Adding a Controller 
+
+Controller is a part of the ```Spring Web MVC```. 
+
+One of the things that a controller does is to map urls to their content. 
+
+A Controller class is annotated with ```@RestController``` annotation. Also, a method can be mapped to a method by making use of the ```@RequestMapping``` annotation.
 
