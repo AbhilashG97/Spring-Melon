@@ -22,6 +22,74 @@ We add all our dependencies in the ```pom.xml``` file and then we run a Maven co
 
 :boom: The POM file describes what to build, but most often not how to build it. 
 
+Here is a sample ```POM``` file - 
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.abhilashg.watermelon</groupId>
+	<artifactId>fruit-api</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Simple Fruit API</name>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.7.RELEASE</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-parent</artifactId>
+			<version>2.1.7.RELEASE</version>
+			<type>pom</type>
+		</dependency>
+	</dependencies>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+</project>
+```
+
+#### Super POM and and POM Inheritance 
+
+All Maven ```POM``` files inherit from a super ```POM```. If no super ```POM``` is specified, the ```POM``` file inherits from the base ```POM```. 
+
+A ```POM``` file can explicitly inherit from another ```POM``` file. That way you can change the settings across all inheriting ```POM```'s via their common super ```POM```.
+
+#### Effective POM
+
+The total ```POM``` file (result of all inheritance) is called the effective ```POM```.  ```POM``` files may inherit from a lot of other ```POM``` files and it may become difficult to view how the resultant POM looks like at the end. For that we make use of effective ```POM```.
+
+#### Maven Repositories
+
+> A repository in Maven holds build artifacts and dependencies of varying types.
+
+There are two types of repositories - 
+
+1.  **Local Repositories**
+1.  **Remote Repositories**
+
+> The local repository is a directory on the computer where Maven runs. It caches remote downloads and contains temporary build artifacts that you have not yet released.
+
+> Remote repositories refer to any other type of repository, accessed by a variety of protocols such as file:// and http://. These repositories might be a truly remote repository set up by a third party to provide their artifacts for downloading (for example, repo.maven.apache.org and uk.maven.org house Maven's central repository)
+
+:boom: Maven also has another repository called the **Central Repository**. The central Maven repository is a repository provided by the Maven community. 
+
+:exclamation: By default Maven looks in central repository for any dependencies needed but not found in your local repository.
+
+#### Snapshot Dependencies
+
+Snapshot dependencies are dependencies (JAR files) which are under development.
+
+ Instead of constantly updating the version numbers to get the latest version, you can depend on a snapshot version of the project. Snapshot versions are always downloaded into your local repository for every build, even if a matching snapshot version is already located in your local repository.
+
+ :boom: You can tell Maven that your project is a snapshot version simply by appending -SNAPSHOT to the version number in the beginning of the ```POM```
+
 ## Starting a Maven Project in Pivotal STS 
 
 Follow these steps to create a simple Maven Project - 
