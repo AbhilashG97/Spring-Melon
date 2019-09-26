@@ -142,5 +142,38 @@ Controller is a part of the ```Spring Web MVC```.
 
 One of the things that a controller does is to map urls to their content. 
 
-A Controller class is annotated with ```@RestController``` annotation. Also, a method can be mapped to a method by making use of the ```@RequestMapping``` annotation.
+A Controller class is annotated with ```@RestController``` annotation. Also, a ```URL``` can be mapped to a method by making use of the ```@RequestMapping``` annotation. The ```@RequestMapping``` annotation takes in a parameter which directs to the ```URL``` of the mapped method. 
 
+Here is an example - 
+
+```java 
+@RestController
+public class Greeting {
+	
+	@RequestMapping("/greeting")
+	public String greeting() {
+		return "Hello, Watermelon!";
+	}
+}
+```
+
+:warning: The ```@RequestMapping``` maps only ```GET``` method by default. To map other HTTP methods we'll need to specify it in the annotation.  
+
+Here is another example - 
+
+```java 
+@RestController
+public class FruitApi {
+
+	@RequestMapping("/fruits")
+	public List<Fruit> getFruitList() {
+		return Arrays.asList(new Fruit("Watermelon", 123), new Fruit("Mango", 343), new Fruit("Sweet Lime", 321),
+				new Fruit("Dragon Fruit", 334), new Fruit("Soursop", 232));
+	}
+
+}
+```
+
+In the above example a list of fruits is returned. 
+
+:radioactive: ```@RequestMapping``` annotation automatically converts the list of fruits which is returned to a ```JSON``` object array. Spring Boot takes care of return value and it makes sure that a ```json``` is returned for methods annotated with ```@RequestMapping```.  
