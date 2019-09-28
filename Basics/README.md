@@ -57,6 +57,8 @@ Here is a sample ```POM``` file -
 
 :boom: In the above code snippet, the ```parent tag``` contains the ```parent POM``` for the current ```child POM```.
 
+:radioactive: Without the ```dependencies``` section, no maven dependencies will be downloaded. 
+
 #### Super POM and and POM Inheritance 
 
 All Maven ```POM``` files inherit from a super ```POM```. If no super ```POM``` is specified, the ```POM``` file inherits from the base ```POM```. 
@@ -176,4 +178,38 @@ public class FruitApi {
 
 In the above example a list of fruits is returned. 
 
-:radioactive: ```@RequestMapping``` annotation automatically converts the list of fruits which is returned to a ```JSON``` object array. Spring Boot takes care of return value and it makes sure that a ```json``` is returned for methods annotated with ```@RequestMapping```.  
+:radioactive: ```@RequestMapping``` annotation automatically converts the list of fruits which is returned to a ```JSON``` object array. Spring Boot takes care of the return value and it makes sure that a ```json``` is returned for methods annotated with ```@RequestMapping```.  
+
+## Embedded Tomcat Server
+
+This section highlights the advantages of having a embedded tomcat server - 
+
+1.	Convenience
+1.	Servelet container config in now application config
+1.	Standalone application
+1.	Useful for Microservices architecture
+
+## Building the API
+
+In order to build an API, we need to first think of the resources that we want to provide. In our case that resource is ```fruit```. 
+
+We need to provide various ways with which we can interact with the resource. Here are a few ways - 
+
+1.	**```/GET```** 
+	```/fruits``` -> returns all the fruits in the database
+
+1.	**```/GET```**
+	```/fruits/id``` -> returns a fruit with ```ID``` specified.
+
+1.	**```/POST```**
+	```/fruits``` -> create a new fruit
+
+1.	**```/PUT```**
+	```/fruits/id``` -> edit the fruit present in the database. 
+
+1.	**```/DELETE```**
+	```fruits/id``` -> delete a fruit with the id specified.
+
+## Creating a Business Service
+
+A business service can be created by making use of the ```@Service``` annotation. 
