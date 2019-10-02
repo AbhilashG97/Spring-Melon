@@ -304,11 +304,11 @@ The ```@RequestMapping``` annotation can be used to send a ```POST``` request. T
 
 The two parameters that are passed are - 
 
-1.	```**value**```	
+1.	**```value```**	
 
 	This argument contains the URL for the POST request.
 
-1.	```**method**```
+1.	**```method```**
 
 	This argument contains the method type for the HTTP request(e.g. ```GET```, ```POST```, ```PUT```, ```DELETE```). 
 
@@ -341,7 +341,7 @@ public void addFruit(@RequestBody Fruit fruit) {
 
 The ```UPDATE``` and ```DELETE``` HTTP methods are similar to the ```POST``` http method when implementing them in Spring Boot.
 
-1.	```**UPDATE**``` HTTP method
+1.	**```UPDATE```** HTTP method
 	
 	The update http method is used to update a particular item on the remote server. In order to send a UPDATE request the following needs to be done - 
 
@@ -369,7 +369,7 @@ The ```UPDATE``` and ```DELETE``` HTTP methods are similar to the ```POST``` htt
 	}	 
 	```
 
-1.	```DELETE``` HTTP method
+1.	**```DELETE```** HTTP method
 
 	The ```DELETE``` HTTP method is also quite easy to implement. It can be implemented using the ```@RequestMapping``` annotation with ```value``` and ```method``` as its parameters. The item specified in the ```value``` parameter of the annotation is passed to the Java method. Then the appropriate method is written in the ```Service``` class which handles the request. 
 
@@ -391,3 +391,23 @@ The ```UPDATE``` and ```DELETE``` HTTP methods are similar to the ```POST``` htt
 		fruits.removeIf(fruit -> fruit.getName().toLowerCase().equals(fruitName.toLowerCase()));
 	}	
 	```
+## Initializing a Spring project
+
+A Spring Boot project cam be initialized in a number of ways. Some of them are mentioned below - 
+
+1.	[Spring Initialir](https://start.spring.io/)
+1.	[Spring Boot CLI](https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started-installing-spring-boot.html)
+1.	STS IDE
+1.	Configure a Spring Boot project from a bare minimum maven project.
+
+:boom: All the methods mentioned above provide a starting Spring Boot project which can be built upon later.
+
+## Configuring a Spring Project 
+
+A few properties of a Spring Project can be changed by specifying the configurations in the ```application.properties``` file. Things like the default port in which the Spring Boot application starts can be configured among other things. 
+
+The ```applications.properties``` file is placed inside the resources folder. 
+
+:warning: Everything inside the ```application.properties``` file is stored in key-value pairs.
+
+:radioactive: The list of all the key-value pairs of the ```application.properties``` file can be found [here](https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html). 
