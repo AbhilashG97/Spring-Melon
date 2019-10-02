@@ -184,7 +184,7 @@ In the above example a list of fruits is returned.
 
 In ```Spring Boot``` we can import a bunch of libraries which work well together directly by invoking the parent and specifying it's version number along with it. 
 
-This is known as ````Bill of Materials``` or ```BOM```.
+This is known as ```Bill of Materials``` or ```BOM```.
 
 ## Embedded Tomcat Server
 
@@ -337,3 +337,57 @@ public void addFruit(@RequestBody Fruit fruit) {
 }
 ```
 
+## Implementing UPDATE and DELETE 
+
+The ```UPDATE``` and ```DELETE``` HTTP methods are similar to the ```POST``` http method when implementing them in Spring Boot.
+
+1.	```**UPDATE**``` HTTP method
+	
+	The update http method is used to update a particular item on the remote server. In order to send a UPDATE request the following needs to be done - 
+
+	1.	Use the ```@RequestMapping``` annotation with ```value``` and ```method``` as its parameters. 
+	1.	In the Java method, ```@PathVariable``` has to be specified which points to the item that needs to be modified on the remote server.       
+
+	Here is an example for the same - 
+
+	The code for the ```Controller``` is shown below -
+
+	```java 
+	@RequestMapping(value="/fruits/{fruitName}", method=RequestMethod.PUT)
+	public void updateFruit(@PathVariable String fruitName, @RequestBody Fruit fruit) {
+		fruitService.updateFruit(fruitName, fruit);
+	}
+	```
+
+	The code for the ```Service``` is shown below -
+
+	```java 
+	public void updateFruit(String fruitName, Fruit fruit) {
+		fruits = fruits.stream()
+		.map(fruitValue -> fruitValue.getName().toLowerCase().equals(fruitName.toLowerCase()) ? fruit : fruitValue)
+		.collect(Collectors.toCollection(ArrayList::new));
+	}	 
+	```
+
+1.	```DELETE``` HTTP method
+
+	The ```DELETE``` HTTP method is also quite easy to implement. It can be implemented using the ```@RequestMapping``` annotation with ```value``` and ```method``` as its parameters. The item specified in the ```value``` parameter of the annotation is passed to the Java method. Then the appropriate method is written in the ```Service``` class which handles the request. 
+
+	Here is an example - 
+
+	Code for the ```Controller``` class is shown below - 
+
+	```java 
+	@RequestMapping(value="/fruits/{fruitName}", method=RequestMethod.DELETE)
+	public void deleteFruit(@PathVariable String fruitName) {
+		fruitService.deleteFruit(fruitName);
+	}
+	```  
+
+	Code for the ```Service``` class is shown below - 
+
+	```java 
+	public void deleteFruit(String fruitName) {
+		fruits.removeIf(fruit -> fruit.getName().toLowerCase().equals(fruitName.toLowerCase()));
+	}	
+	```
