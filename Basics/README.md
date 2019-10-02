@@ -180,6 +180,12 @@ In the above example a list of fruits is returned.
 
 :radioactive: ```@RequestMapping``` annotation automatically converts the list of fruits which is returned to a ```JSON``` object array. Spring Boot takes care of the return value and it makes sure that a ```json``` is returned for methods annotated with ```@RequestMapping```.  
 
+## Bill of Materials
+
+In ```Spring Boot``` we can import a bunch of libraries which work well together directly by invoking the parent and specifying it's version number along with it. 
+
+This is known as ````Bill of Materials``` or ```BOM```.
+
 ## Embedded Tomcat Server
 
 This section highlights the advantages of having a embedded tomcat server - 
@@ -212,4 +218,122 @@ We need to provide various ways with which we can interact with the resource. He
 
 ## Creating a Business Service
 
-A business service can be created by making use of the ```@Service``` annotation. 
+A business service can be created by making use of the ```@Service``` annotation. The ```@Service``` annotation is provided to the class providing the resource.
+
+The service class is then called in a class that needs this service. 
+
+:radioactive: The class needing the service is called a ```Dependency```. 
+
+The dependency class can be provided using the ```@Autowired``` annotation.
+
+Here is an example - 
+
+The below code snippet shows a ```Service```.
+
+```java
+@Service
+public class FruitService {
+
+	private ArrayList<Fruit> fruits = new ArrayList<>();
+	
+	public ArrayList<Fruit> getFruits() {
+		fruits.add(new Fruit("Watermelon", 100));
+		fruits.add(new Fruit("Apple", 140));
+		fruits.add(new Fruit("Orange", 350));
+		fruits.add(new Fruit("Mango", 500));
+		fruits.add(new Fruit("Dragon-fruit", 200));
+		fruits.add(new Fruit("Soursop", 1200));
+		fruits.add(new Fruit("Star-fruit", 145));
+		fruits.add(new Fruit("Sweet Lime", 123));
+		return fruits;
+	}
+	
+}
+```
+
+The below code snippet shows a dependency being injected in the controller class which requires the dependency.
+
+```java 
+@RestController
+public class FruitController {
+	
+	@Autowired
+	private FruitService fruitService;
+	
+	@RequestMapping("")
+	public String sayHello() {
+		return "Hello, World!";
+	}
+	
+	@RequestMapping("/fruits")
+	public ArrayList<Fruit> getFruitData() {
+		return fruitService.getFruits();
+	}
+}
+```
+
+## Returning a single resource from a business service
+
+The ```Service``` class can be used to return a single resource to the dependent class by making use of the ```@PathVariable``` annotation. 
+
+Here is an example -
+
+The code snippet shown below is for the ```Service```.
+
+```java 
+public Fruit getFruit(String fruit) {
+	return fruits.stream().filter((fruitValue) -> fruitValue.getName().toLowerCase().equals(fruit.toLowerCase()))
+			.findFirst().get();
+}
+```
+
+The code snippet shown below is for the Contoller - 
+
+```java 
+@RequestMapping("/fruits/{fruit}")
+public Fruit getFruit(@PathVariable String fruit) {
+	return fruitService.getFruit(fruit);
+}
+```
+
+## Sending a POST Request
+
+Sending a ```POST``` request is a bit more complicated then sending a ```GET``` request. 
+
+The ```@RequestMapping``` annotation can be used to send a ```POST``` request. Two parameters are passed with the ```@RequestMapping``` annotation. 
+
+The two parameters that are passed are - 
+
+1.	```**value**```	
+
+	This argument contains the URL for the POST request.
+
+1.	```**method**```
+
+	This argument contains the method type for the HTTP request(e.g. ```GET```, ```POST```, ```PUT```, ```DELETE```). 
+
+The ```Service``` class is also modified accordingly to include the ```POST``` request. 
+
+:radioactive: ```@RequestBody``` annotation is used to include the payload for the ```POST``` request. It has to be provided by the client sending the ```POST``` request. The ```Content-Type``` for the header is usually set to ```application/json```.
+
+:warning: Software like [Postman](https://www.getpostman.com/) can be used to send ```POST``` requests with ease. 
+
+Here is an example - 
+
+Code snippet for the ```Service``` class is shown below -
+
+```java 
+public void addFruit(Fruit fruit) {
+	fruits.add(fruit);
+}
+```
+
+Code snippet for the ```Controller``` is shown below -
+
+```java 
+@RequestMapping(value="/fruits", method=RequestMethod.POST)
+public void addFruit(@RequestBody Fruit fruit) {
+	fruitService.addFruit(fruit);
+}
+```
+
