@@ -1,5 +1,7 @@
 # Spring Boot Basics
 
+:seedling: A sample project on Spring project can be found [here](https://github.com/AbhilashG97/Spring-Melon/tree/master/Basics/Fruit-API).
+
 ## Environment Setup
 
 Spring Tools Suite is an excellent IDE that can be used to develop Spring apps. Also, appropriate JDK needs to be installed before hand as well. 
