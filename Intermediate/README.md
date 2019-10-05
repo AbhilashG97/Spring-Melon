@@ -58,7 +58,7 @@ This is an extension of the previous section. Here we will create an API which f
 
 We will be creating a mock Fruit-Dessert API. 
 
-A sample project can be found [here](#)
+A sample project can be found [here](https://github.com/AbhilashG97/Spring-Melon/tree/master/Intermediate/Fruit-Dessert-API)
 
 We will be using an embedded database called ```DerbyDB``` to create the Datatables. In order to create the two tables, we will create two model classes which are associated with each other.
 
