@@ -1,5 +1,7 @@
 package com.fruitdessertapi.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,10 @@ public class DessertService {
 	
 	@Autowired
 	private DessertRepository dessertRepository;
+
+	public ArrayList<Dessert> getDesserts(int fruitId) {
+		return dessertRepository.findByFruitId(fruitId);
+	}
 	
 	public Dessert getDessert(int dessertID) {
 		return dessertRepository.findById(dessertID).get();
@@ -27,4 +33,5 @@ public class DessertService {
 	public void deleteDessert(int dessertID) {
 		dessertRepository.deleteById(dessertID);
 	}
+
 }

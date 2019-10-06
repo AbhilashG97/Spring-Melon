@@ -90,3 +90,48 @@ Sample Datatable for the both the classes are shown below -
 
 :warning: The ```Controllers```, ```Services``` and ```Repositories``` are created as usual. 
 
+### :warning: Points to note while creating the Controller for nested datatables :warning:
+
+:warning: When writing the method for ```POST``` and ```PUT``` HTTP method, do bear in mind to initialize it's dependency with the appropriate ID so that it gets mapped accordingly. 
+
+Here is an example - 
+
+```java 
+	@PostMapping("/fruits/{fruitID}/desserts")
+	public void addDessert(@RequestBody Dessert dessert, @PathVariable int fruitID) {
+		dessert.setFruit(new Fruit(fruitID, "", 0));
+		dessertService.addDessert(dessert);
+	}
+	
+	@PutMapping("/fruits/{fruitID}/desserts") 
+	public void updateDessert(@RequestBody Dessert dessert, @PathVariable int fruitID) {
+		dessert.setFruit(new Fruit(fruitID, "", 0));
+		dessertService.updateDessert(dessert);
+	}
+```
+
+:warning: Nested API values can be suppressed by making use of the appropriate ```JPA``` annotation. 
+
+## Packaging and running a Spring Boot application
+
+Packaging and running a Spring Boot application is quite simple and it can be achieved by executing the following ```maven``` command - 
+
+```maven clean install```
+
+The above mentioned command creates a ```jar``` file and places it inside the target folder. The jar file can then be run using the following command - 
+
+```java -jar target/fileName.jar```
+
+:warning: Spring Boot also supports the ability to deploy a ```war``` file. 
+
+In order to get a ```war``` file, the packaging attribute in the ```pom.xml``` file needs to be changed. After it is changed, ```mvn clean install``` command needs to be run again to build the ```war``` file. 
+
+## Spring Boot Actuator 
+
+> In essence, Actuator brings production-ready features to our application.
+
+> Monitoring our app, gathering metrics, understanding traffic or the state of our database becomes trivial with this dependency.
+
+The dependency for ```Actuator``` needs to be added to the project and then the ```Actuator``` can be used.
+
+The port to access the ```Actuator``` can also be changed by modifying the ```application.properties``` file. The property for changing the port of the actuator in the ```application.properties``` file is ```management.server.port=```
