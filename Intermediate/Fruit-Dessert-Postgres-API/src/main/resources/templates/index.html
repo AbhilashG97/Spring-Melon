@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Fruit Manager</title>
+</head>
+<body>
+	<div align="center">
+		<h1>Fruit Manager</h1>
+		<a href="new">Add new fruit</a>
+		<br></br>
+		<table border="1" cellpadding="10">
+			<thead>
+				<tr>
+					<th>Fruit ID</th>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="fruit : ${listFruits}">
+					<td th:text="${fruit.id}">Fruit ID</td>
+					<td th:text="${fruit.name}">Name</td>	
+					<td th:text="${fruit.price}">Price</td>
+					<td>
+						<a th:href="@{'/edit/' + ${fruit.id}}">Edit</a>
+						<a th:href="@{'/delete/' + ${fruit.id}}">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

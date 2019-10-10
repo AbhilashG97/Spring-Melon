@@ -112,6 +112,21 @@ Here is an example -
 
 :warning: Nested API values can be suppressed by making use of the appropriate ```JPA``` annotation. 
 
+### Adding methods to the Repository
+
+In order to get a certain set of values from the database we can write methods following a certain naming conventions. More information can be found [here](https://docs.spring.io/spring-data/data-commons/docs/1.6.1.RELEASE/reference/html/repositories.html).  
+
+## Spring Boot Project with an external database
+
+Here are a few points to keep in mind - 
+
+1. 	Add the appropriate dependency for the Database (Database connectors)
+1.	Specify the database configuration in the ```application.properties``` file. 
+
+The rest is quite similar to the projects mentioned above.
+
+Have a look at [this project](https://github.com/AbhilashG97/Spring-Melon/tree/master/Intermediate/Fruit-Dessert-Postgres-API) for more information on how to work with external databases in Spring Boot. 
+
 ## Packaging and running a Spring Boot application
 
 Packaging and running a Spring Boot application is quite simple and it can be achieved by executing the following ```maven``` command - 
